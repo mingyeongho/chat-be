@@ -2,6 +2,7 @@ import { Resolver, Query, Mutation, Args } from '@nestjs/graphql';
 import { UserService } from './user.service';
 import { User } from './entities/user.entity';
 import { CreateUserDto } from './dto/create-user.input';
+import { LoginDto } from './dto/login.dto';
 
 @Resolver(() => User)
 export class UserResolver {
@@ -10,6 +11,12 @@ export class UserResolver {
   @Query(() => User)
   async findUser(@Args('search', { type: () => String }) search: string) {
     return await this.userService.findUser({ search });
+  }
+
+  @Mutation(() => User)
+  async login(@Args('inputs', { type: () => LoginDto }) inputs: LoginDto) {
+    const { email, password } = inputs;
+    return await this.userService.login({ email, password });
   }
 
   @Mutation(() => User)
