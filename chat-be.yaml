@@ -1,0 +1,14 @@
+name: chat-be
+app: node@18
+options:
+  env:
+    - name: NODE_ENV
+      value: production
+  ports: 3000
+  install: npm ci
+  build: npm run build
+  start: npm run start
+context:
+  git:
+    url: https://github.com/mingyeongho/chat-be.git
+    branch: main
