@@ -7,9 +7,9 @@ import { CreateUserDto } from './dto/create-user.input';
 export class UserResolver {
   constructor(private readonly userService: UserService) {}
 
-  @Query(() => [User], { name: 'user' })
-  findAll() {
-    return this.userService.findAll();
+  @Query(() => User)
+  async findUser(@Args('search', { type: () => String }) search: string) {
+    return await this.userService.findUser({ search });
   }
 
   @Mutation(() => User)
