@@ -1,0 +1,68 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+input CreateUserDto {
+  """카카오 이메일"""
+  email: String!
+
+  """카카오 ID"""
+  kakaoId: String!
+
+  """이름"""
+  name: String!
+
+  """비밀번호"""
+  password: String!
+
+  """핸드폰 번호"""
+  phone: String!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type Mutation {
+  createUser(user: CreateUserDto!): User!
+}
+
+type Query {
+  user: [User!]!
+}
+
+type User {
+  """생성일"""
+  createdAt: DateTime!
+
+  """삭제일"""
+  deletedAr: DateTime!
+
+  """카카오 이메일"""
+  email: String!
+
+  """Primary Key"""
+  id: ID!
+
+  """카카오 ID"""
+  kakaoId: String!
+
+  """상태 메시지"""
+  message: String
+
+  """이름"""
+  name: String!
+
+  """본인 닉네임"""
+  nickname: String!
+
+  """비밀번호"""
+  password: String!
+
+  """핸드폰 번호"""
+  phone: String!
+
+  """마지막 업데이트일"""
+  updatedAt: DateTime!
+}
