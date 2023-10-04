@@ -16,6 +16,7 @@ import { typeOrmConfig } from './config/typeorm.config';
       driver: ApolloDriver,
       autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
       sortSchema: true,
+      playground: true,
     }),
     TypeOrmModule.forRoot(typeOrmConfig),
     UserModule,
