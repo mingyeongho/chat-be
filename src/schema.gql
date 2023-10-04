@@ -32,9 +32,13 @@ input LoginDto {
   password: String!
 }
 
+type LoginOutput {
+  access_token: String!
+}
+
 type Mutation {
   createUser(user: CreateUserDto!): User!
-  login(inputs: LoginDto!): User!
+  login(inputs: LoginDto!): LoginOutput!
 }
 
 type Query {

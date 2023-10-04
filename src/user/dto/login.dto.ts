@@ -1,4 +1,4 @@
-import { Field, InputType, PickType } from '@nestjs/graphql';
+import { Field, InputType, ObjectType, PickType } from '@nestjs/graphql';
 import { User } from '../entities/user.entity';
 import { Column } from 'typeorm';
 
@@ -11,4 +11,10 @@ export class LoginDto extends PickType(User, ['email', 'password'] as const) {
   @Field(() => String, { description: '비밀번호' })
   @Column()
   password: string;
+}
+
+@ObjectType()
+export class LoginOutput {
+  @Field(() => String)
+  access_token: string;
 }

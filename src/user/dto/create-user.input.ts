@@ -1,6 +1,7 @@
 import { Field, InputType, PickType } from '@nestjs/graphql';
 import { User } from '../entities/user.entity';
 import { Column } from 'typeorm';
+import { IsEmail } from 'class-validator';
 
 @InputType()
 export class CreateUserDto extends PickType(User, [
@@ -16,6 +17,7 @@ export class CreateUserDto extends PickType(User, [
 
   @Field(() => String, { description: '카카오 이메일' })
   @Column()
+  @IsEmail()
   email: string;
 
   @Field(() => String, { description: '핸드폰 번호' })
