@@ -8,6 +8,9 @@ options:
   install: npm ci
   build: npm run build
   start: npm run start
+  buildenv:
+    - name: DB_HOST
+      value: chat-db.c7dxznkqe35h.ap-northeast-2.rds.amazonaws.com
 context:
   git:
     url: https://github.com/mingyeongho/chat-be.git
