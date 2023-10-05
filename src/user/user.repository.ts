@@ -33,20 +33,25 @@ export class UserRepository extends Repository<User> {
       throw new UnauthorizedException('일치하는 유저가 없습니다.');
     }
 
-    const payload = { sub: user.kakaoId, username: user.name };
+    const payload = {
+      kakaoId: user.kakaoId,
+      email: user.email,
+      name: user.name,
+    };
 
     return {
       access_token: await this.jwtService.signAsync(payload),
     };
   }
 
-  async createUser({ user }: { user: CreateUserDto }) {
-    const hashedPassword = await hashing({ text: user.password });
+  async createUser({ ...props }: CreateUserDto) {
+    const { password, name } = props;
+    const hashedPassword = await hashing({ text: password });
 
     const newUser = this.create({
-      ...user,
+      ...props,
       password: hashedPassword,
-      nickname: user.name,
+      nickname: name,
     });
 
     return this.save(newUser);

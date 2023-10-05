@@ -1,15 +1,15 @@
 import { Field, InputType, ObjectType, PickType } from '@nestjs/graphql';
 import { User } from '../entities/user.entity';
-import { Column } from 'typeorm';
+import { IsString } from 'class-validator';
 
 @InputType()
 export class LoginDto extends PickType(User, ['email', 'password'] as const) {
   @Field(() => String, { description: '카카오 이메일' })
-  @Column()
+  @IsString()
   email: string;
 
   @Field(() => String, { description: '비밀번호' })
-  @Column()
+  @IsString()
   password: string;
 }
 

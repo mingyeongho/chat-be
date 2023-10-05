@@ -15,14 +15,13 @@ export class UserResolver {
 
   @Mutation(() => LoginOutput)
   async login(@Args('inputs', { type: () => LoginDto }) inputs: LoginDto) {
-    const { email, password } = inputs;
-    return await this.userService.login({ email, password });
+    return await this.userService.login({ ...inputs });
   }
 
   @Mutation(() => User)
   async createUser(
     @Args('user', { type: () => CreateUserDto }) user: CreateUserDto,
   ) {
-    return await this.userService.create({ user });
+    return await this.userService.create({ ...user });
   }
 }

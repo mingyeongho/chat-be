@@ -15,7 +15,7 @@ export class UserService {
     return await this.userRepository.login({ email, password });
   }
 
-  async create({ user }: { user: CreateUserDto }) {
-    return this.userRepository.createUser({ user });
+  async create({ ...props }: CreateUserDto) {
+    return this.userRepository.createUser({ ...props });
   }
 }
