@@ -2,13 +2,12 @@ import { BadRequestException, Injectable, PipeTransform } from '@nestjs/common';
 import { LoginDto } from '../dto/login.dto';
 
 @Injectable()
-export class LoginValidPipe implements PipeTransform {
+export class LoginValidPipe implements PipeTransform<LoginDto, LoginDto> {
   transform(value: LoginDto) {
     const { email, password } = value;
 
     // email validation
-    const emailRegex =
-      /^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[a-zA-Z]{2,}(?:\.[a-zA-Z]{2,})?$/;
+    const emailRegex = /^[a-zA-Z0-9]+@[a-zA-Z]+\.[a-z]{2,}(?:\.[a-z]{2,})?$/;
     if (!emailRegex.test(email)) {
       throw new BadRequestException('이메일 형식이 맞지 않습니다.');
     }

@@ -4,6 +4,7 @@ import { User } from './entities/user.entity';
 import { CreateUserDto } from './dto/create-user.input';
 import { LoginDto, LoginOutput } from './dto/login.dto';
 import { LoginValidPipe } from './pipes/login.pipe';
+import { SignUpValidPipe } from './pipes/signup.pipe';
 
 @Resolver(() => User)
 export class UserResolver {
@@ -23,7 +24,8 @@ export class UserResolver {
 
   @Mutation(() => User)
   async createUser(
-    @Args('user', { type: () => CreateUserDto }) user: CreateUserDto,
+    @Args('user', { type: () => CreateUserDto }, SignUpValidPipe)
+    user: CreateUserDto,
   ) {
     return await this.userService.create({ ...user });
   }
