@@ -3,6 +3,7 @@ import { UserService } from './user.service';
 import { User } from './entities/user.entity';
 import { CreateUserDto } from './dto/create-user.input';
 import { LoginDto, LoginOutput } from './dto/login.dto';
+import { LoginValidPipe } from './pipes/login.pipe';
 
 @Resolver(() => User)
 export class UserResolver {
@@ -14,7 +15,9 @@ export class UserResolver {
   }
 
   @Mutation(() => LoginOutput)
-  async login(@Args('inputs', { type: () => LoginDto }) inputs: LoginDto) {
+  async login(
+    @Args('inputs', { type: () => LoginDto }, LoginValidPipe) inputs: LoginDto,
+  ) {
     return await this.userService.login({ ...inputs });
   }
 
