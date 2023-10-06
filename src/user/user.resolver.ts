@@ -5,6 +5,10 @@ import { CreateUserDto } from './dto/create-user.input';
 import { LoginDto, LoginOutput } from './dto/login.dto';
 import { LoginValidPipe } from './pipes/login.pipe';
 import { SignUpValidPipe } from './pipes/signup.pipe';
+import { MeOutput } from './dto/me.dto';
+import { UseGuards } from '@nestjs/common';
+import { JwtAuthGuard } from './guard/auth.guard';
+import { AuthUser } from './decorator/auth-user.decorator';
 
 @Resolver(() => User)
 export class UserResolver {
@@ -28,5 +32,13 @@ export class UserResolver {
     user: CreateUserDto,
   ) {
     return await this.userService.create({ ...user });
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Query(() => MeOutput)
+  me(@AuthUser() authUser: MeOutput) {
+    return {
+      ...authUser,
+    };
   }
 }

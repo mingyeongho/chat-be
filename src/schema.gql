@@ -36,6 +36,17 @@ type LoginOutput {
   access_token: String!
 }
 
+type MeOutput {
+  """본인의 이메일"""
+  email: String!
+
+  """본인의 카카오 아이디"""
+  kakaoId: String!
+
+  """본인의 이름"""
+  name: String!
+}
+
 type Mutation {
   createUser(user: CreateUserDto!): User!
   login(inputs: LoginDto!): LoginOutput!
@@ -43,6 +54,7 @@ type Mutation {
 
 type Query {
   findUser(search: String!): User!
+  me: MeOutput!
 }
 
 type User {
